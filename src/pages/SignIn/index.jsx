@@ -27,7 +27,8 @@ export default function SignIn() {
                     source={require('../../assets/Logo.png')}
                 />
                 <AreaInput>
-                    <Input placeholder='seu email...' />
+                    <Input placeholder='seu email...'
+                    />
                 </AreaInput>
                 <AreaInput>
                     <Input placeholder='Senha...' />
