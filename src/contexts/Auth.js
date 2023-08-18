@@ -17,7 +17,8 @@ export default function AuthProvider({ children }) {
         (async() => {
             const token = await AsyncStorage.getItem("@user");
             if(!token){
-                setUser(null)
+                setUser(null);
+                setLoading(false);
                 return;
             }
 
@@ -33,6 +34,7 @@ export default function AuthProvider({ children }) {
             }catch(err){
                 console.log(err);
                 setUser(null)
+                setLoading(false)
             }
         })()
     },[])
@@ -70,6 +72,14 @@ export default function AuthProvider({ children }) {
             console.log(err)
         }
     }
+
+    async function SignOut(){
+        await AsyncStorage.clear()
+        .then(()=> {
+            setUser(null);
+        })
+        
+    }
     return (
         <AuthContext.Provider
             value={{
@@ -78,7 +88,8 @@ export default function AuthProvider({ children }) {
                 signUp,
                 SignIn,
                 loadingAuth,
-                loading
+                loading,
+                SignOut
             }}
         >
             {children}
